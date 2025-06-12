@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.3"
+agp = "8.5.0"
 appcontext = "2.2.4"
 crccCommon = "1.3.2-SNAPSHOT"
 crccCluster = "2.1.0-SNAPSHOT"

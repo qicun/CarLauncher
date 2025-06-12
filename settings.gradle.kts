@@ -30,5 +30,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RailSystemUI"
+rootProject.name = "launcher"
 include(":app")
