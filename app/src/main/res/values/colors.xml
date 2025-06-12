@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_backgroud">#FF161D2E</color>
+    <color name="dialog_backgroud">#FF3D3F50</color>
+    <color name="dialog_confirm_backgroud">#FF4047FF</color>
+    <color name="dialog_cancel_backgroud">#FF555975</color>
+    <color name="content_normal_white">#FFFBFBFB</color>
+    <color name="content_normal_des">#FF8488AA</color>
+
+    <color name="black">#FF000000</color>
+    <color name="black_transparent">#99000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_transparent">#80FFFFFF</color>
+    <color name="white_transparent_two">#99FFFFFF</color>
+
+    <!-- 状态栏-->
+    <color name="status_bar_bg">#00000000</color>
+    <!-- 导航栏 -->
+    <color name="nb_bg">#00000000</color>
+
+    <!-- 360副屏状态栏-->
+    <color name="sub_status_bar_bg">#00000000</color>
+    <!-- 360副屏导航栏 -->
+    <color name="sub_nb_bg">#00000000</color>
+
+    <color name="no_skin_txt_white">#ffffff</color>
+    <color name="no_skin_txt_black">#000000</color>
+    <color name="no_skin_qs_bottom_line_bg">#FF768192</color>
+
+    <color name="color_0b1018">#ff0b1018</color>
+    <color name="color_ff187bed">#ff187bed</color>
+    <color name="color_565A64">#565A64</color>
+    <color name="color_667288">#667288</color>
+    <color name="color_4E5E72">#4E5E72</color>
+    <color name="color_187BED">#187BED</color>
+    <color name="color_43ACFF">#43ACFF</color>
+</resources>

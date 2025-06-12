@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) <2025>, <zlingsmart technology Corporation>.
+  ~ All rights reserved.
+  ~ The use, copying, distribution, transmission and modification of this file
+  ~ are allowed only with the written authorization of Zlingsmart Technology.
+-->
+
+<resources>
+    <!--
+        LogUtil 日志输出使用的 log tag
+        @see com.raite.crcc.common.Config.logGroupTag
+    -->
+    <string name="crcc_common_config_log_group_tag" translatable="false">CrccSystemUi</string>
+</resources>

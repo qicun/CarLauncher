@@ -1,0 +1,176 @@
+<resources>
+    <string name="app_name">RailSystemUI</string>
+
+    <string name="all_menu_action">com.android.raite.systemui.allmenu</string>
+    <string name="launcher_package">com.raite.launcher</string>
+
+    <string name="screen_off">息屏</string>
+    <string name="bluetooth">蓝牙</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="mobile_data">热点</string>
+
+    <string name="vol_media">媒体音量</string>
+    <string name="vol_ringtone">来电音量</string>
+    <string name="vol_call">通话音量</string>
+
+    <string name="time">16:30</string>
+    <string name="date">1月1日   星期一</string>
+    <string name="temp">28.0℃</string>
+    <string name="default_temp">__</string>
+    <string name="mc_def">MC1</string>
+    <string name="ac_temperature">%.1f°C</string>
+
+    <string name="panel_title">QuickSetPanel</string>
+    <string name="panel_sub_title">SubQuickSetPanel</string>
+    <string name="screen_off_title">ScreenOffView</string>
+    <string name="statusbar_title">StatusBar</string>
+    <string name="navigationbar_title">NavigationBar</string>
+
+
+    <string name="desc_panel_bottom_btn">收起面板</string>
+    <string name="sb_call_wait">等待接听…</string>
+    <string name="sb_call_out">正在呼叫…</string>
+    <string name="sb_calling">通话中…</string>
+
+    <string-array name="week">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </string-array>
+
+    <!--默认app列表-->
+    <string-array name="default_application_pkg_list">
+        <item>com.raite.service.hvac</item><!-- 空调 -->
+        <item>com.raite.settings</item><!-- 系统设置 -->
+        <item>com.raite.vehiclecontrol</item><!-- 车辆设置 -->
+        <item>com.raite.media</item><!-- 多媒体 -->
+        <item>com.raite.gallery</item><!-- 图片视频 -->
+        <item>com.raite.btcall</item><!-- 蓝牙电话 -->
+        <item>com.raite.raiteamapnavi</item><!-- 地图导航 -->
+    </string-array>
+
+    <!--  app黑名单，需要过滤  -->
+    <string-array name="app_blacklist">
+        <!-- launcher -->
+        <item>com.raite.launcher</item>
+        <!-- 原生设置 -->
+        <item>com.android.settings</item>
+        <!-- 原生音乐 -->
+        <item>com.android.music</item>
+        <!-- 原生相机 -->
+        <item>com.android.camera2</item>
+        <!-- 原生文件 -->
+        <item>com.android.documentsui</item>
+        <!-- 工程模式 -->
+        <item>com.android.engmode</item>
+        <!-- 原生工程模式  -->
+        <item>com.raite.enginemode</item>
+        <!-- Lightning  -->
+        <item>acr.browser.barebones</item>
+        <!-- Explorer  -->
+        <item>com.android.rk</item>
+        <!-- Settings  -->
+        <item>com.android.car.settings</item>
+        <!-- Video  -->
+        <item>android.rk.RockVideoPlayer</item>
+        <!-- Radio  -->
+        <item>com.android.car.radio</item>
+        <!-- Bug Report  -->
+        <item>com.android.car.bugreport</item>
+        <!-- GarageMode Test App  -->
+        <item>com.google.android.car.garagemode.testapp</item>
+        <!-- Kitchen Sink  -->
+        <item>com.google.android.car.kitchensink</item>
+        <!-- 语助服务  -->
+        <item>com.raite.services.assistant</item>
+        <!-- 蓝牙电话服务  -->
+        <item>com.raite.services.btcall</item>
+        <!-- 媒体服务  -->
+        <item>com.raite.services.media</item>
+        <!-- multidisplay  -->
+        <item>com.raite.service.multidisplay</item>
+        <!-- upgrade  -->
+        <item>com.raite.service.upgrade</item>
+        <!-- 日志服务  -->
+        <item>com.raite.services.log</item>
+        <!-- calendar  -->
+        <item>com.android.calendar</item>
+        <!-- dialer  -->
+        <item>com.android.car.dialer</item>
+        <!-- contacts  -->
+        <item>com.android.contacts</item>
+        <!-- deskclock  -->
+        <item>com.android.deskclock</item>
+        <!-- gallery  -->
+        <item>com.android.gallery3d</item>
+        <!-- soundrecorder  -->
+        <item>com.android.soundrecorder</item>
+        <!-- calculator  -->
+        <item>com.android.calculator2</item>
+        <!-- quicksearch  -->
+        <item>com.android.quicksearchbox</item>
+        <!-- webview_shell  -->
+        <item>org.chromium.webview_shell</item>
+        <!-- ligntning  -->
+        <item>acr.browser.lightning</item>
+        <!-- camera2  -->
+        <item>com.android.rockchip.camera2</item>
+        <!-- tv  -->
+        <item>com.android.tv</item>
+        <!-- messager  -->
+        <item>com.android.car.messenger</item>
+        <!-- firefly  -->
+        <item>com.firefly.fireflyapi2demo</item>
+        <!-- technicalcase  -->
+        <item>com.firefly.technicalcase</item>
+        <!-- adaslocation  -->
+        <item>com.google.android.car.adaslocation</item>
+        <!-- preferenceupdater  -->
+        <item>com.google.android.car.networking.preferenceupdater</item>
+        <!-- rklogstool  -->
+        <item>com.rockchip.rklogstool</item>
+        <!-- testscheduleonoff  -->
+        <item>com.tchip.testscheduleonoff</item>
+
+    </string-array>
+
+    <string name="toast_bluetooth_disconnected">蓝牙已断开连接</string>
+    <string name="toast_wifi_disconnected">WiFi已断开连接</string>
+    <string name="toast_hotspot_disconnected">个人热点已断开连接</string>
+    <string name="toast_wifi_open_hotspot_close">WiFi打开会关闭个人热点</string>
+
+    <string name="str_recentuse_front">点击图标进行选择/取消 (</string>
+    <string name="str_recentuse_end">/4)</string>
+    <string name="str_allmenu_tab_all_app">车机应用</string>
+    <string name="str_allmenu_tab_carlink_app">Carlink应用</string>
+    <string name="str_allmenu_edit_app_confirm">确认</string>
+    <string name="str_allmenu_edit_app_cancel">取消</string>
+
+    <string name="str_status_bar_current_station">当前站:</string>
+    <string name="str_status_bar_next_station">下一站:</string>
+    <string name="str_status_bar_terminal">终点站:</string>
+    <string name="str_status_bar_use_no_login">未登录</string>
+
+    <string name="str_systemui_type_unknown">未知</string>
+    <string name="carriage_control_def">集控</string>
+    <string name="carriage_mc1_def">MC1</string>
+    <string name="carriage_t_def">T</string>
+    <string name="carriage_mc2_def">MC2</string>
+
+    <string name="str_status_bar_temp_des">%1$s°C</string>
+    <string name="str_status_bar_current_station_des">许各寨</string>
+    <string name="str_status_bar_train_num_des">T%1$s</string>
+    <string name="str_status_bar_next_station_des">唐山站西</string>
+    <string name="str_status_bar_terminal_des">唐山北站</string>
+
+    <string name="str_select_carriage_head_title">请选择驾驶室位置</string>
+    <string name="str_select_carriage_head_des">选择驾驶室位置后，将重新启动系统完成初始化配置</string>
+    <string name="str_select_carriage_head_load">正在初始化，请稍后…</string>
+    <string name="str_select_carriage_head_confirm_msg">是否选择%1$s为驾驶室？</string>
+    <string name="str_select_carriage_head_confirm_set_msg">确定</string>
+    <string name="str_select_carriage_head_confirm_cancel_msg">取消</string>
+</resources>

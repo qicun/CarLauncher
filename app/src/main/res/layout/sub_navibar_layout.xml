@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/naviView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sub_nb_bg">
+
+    <ImageButton
+        android:id="@+id/cameraBtn"
+        style="@style/nb_btn"
+        android:layout_marginStart="@dimen/ps_nv_margin"
+        android:background="@drawable/selector_nv_camera"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/a360Btn"
+        style="@style/nb_btn"
+        android:background="@drawable/selector_nv_360"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/videoBtn"
+        app:layout_constraintStart_toEndOf="@id/cameraBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/videoBtn"
+        style="@style/nb_btn"
+        android:background="@drawable/selector_nv_video"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/diskBtn"
+        app:layout_constraintStart_toEndOf="@id/a360Btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/diskBtn"
+        style="@style/nb_btn"
+        android:background="@drawable/selector_nv_disk"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/logBtn"
+        app:layout_constraintStart_toEndOf="@id/videoBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/logBtn"
+        style="@style/nb_btn"
+        android:layout_marginEnd="@dimen/ps_nv_margin"
+        android:background="@drawable/selector_nv_log"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
