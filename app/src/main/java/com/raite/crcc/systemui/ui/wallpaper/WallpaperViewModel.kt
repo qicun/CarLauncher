@@ -69,18 +69,15 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
      */
     fun toggleSection(section: Section) {
         Plog.i(mObjectTag, "Toggling section: ${section.name}")
-        val currentState = _uiState.value
-        if (currentState is WallpaperUiState.Success) {
-            val newList = currentState.wallpaperItems.map { item ->
-                if (item is WallpaperItem.Header && item.section == section) {
-                    item.copy(isExpanded = !item.isExpanded)
-                } else {
-                    item
-                }
+        val newList = originalList.map { item ->
+            if (item is WallpaperItem.Header && item.section == section) {
+                item.copy(isExpanded = !item.isExpanded)
+            } else {
+                item
             }
-            originalList = newList // 更新原始列表以保存折叠状态
-            updateDisplayedList()
         }
+        originalList = newList // 更新原始列表以保存折叠状态
+        updateDisplayedList()
     }
 
     /**
