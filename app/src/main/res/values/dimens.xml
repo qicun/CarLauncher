@@ -430,4 +430,8 @@
     <dimen name="wallpaper_item_height">114dp</dimen>
     <dimen name="wallpaper_item_spacing">20dp</dimen>
     <dimen name="wallpaper_selection_checkbox_size">26dp</dimen>
+
+    <!-- Desktop App Icon Dimensions -->
+    <dimen name="app_icon_container_size">72dp</dimen>
+    <dimen name="app_icon_spacing">40dp</dimen>
 </resources>

@@ -13,10 +13,10 @@ class DesktopPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(ac
 
     /**
      * 返回桌面页面的总数。
-     * 此处硬编码为2，代表有两个桌面屏幕。
+     * 此处修改为1，以实现单屏桌面的需求。
      * TODO: 未来可以根据用户配置动态返回页面数量。
      */
-    override fun getItemCount(): Int = 2
+    override fun getItemCount(): Int = 1
 
     /**
      * 根据位置创建对应的桌面 Fragment。

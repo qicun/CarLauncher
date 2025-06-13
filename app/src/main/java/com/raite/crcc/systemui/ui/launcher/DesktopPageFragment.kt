@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.raite.crcc.systemui.R
+import com.raite.crcc.systemui.util.GridSpacingItemDecoration
 import kotlinx.coroutines.launch
 
 /**
@@ -56,10 +57,25 @@ class DesktopPageFragment : Fragment() {
                 Toast.makeText(context, "启动 ${appInfo.label} 出错", Toast.LENGTH_SHORT).show()
             }
         }
+        
+        val spacing = resources.getDimensionPixelSize(R.dimen.app_icon_spacing)
+        val itemContainerWidth = resources.getDimensionPixelSize(R.dimen.app_icon_container_size)
+
+        // 动态计算列数
+        val displayMetrics = resources.displayMetrics
+        val screenWidth = displayMetrics.widthPixels
+        val spanCount = (screenWidth - spacing) / (itemContainerWidth + spacing)
+
         recyclerView.apply {
-            // 使用网格布局，每行5个图标。
-            layoutManager = GridLayoutManager(context, 5)
+            // 使用网格布局
+            layoutManager = GridLayoutManager(context, spanCount)
             adapter = appListAdapter
+            // 添加间距装饰器
+            // 确保如果已存在，先移除旧的，防止重复添加
+            if (itemDecorationCount > 0) {
+                removeItemDecorationAt(0)
+            }
+            addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, true))
         }
     }
 
