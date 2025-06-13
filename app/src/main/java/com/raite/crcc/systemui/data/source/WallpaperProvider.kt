@@ -1,6 +1,8 @@
 package com.raite.crcc.systemui.data.source
 
 /**
+ * 不进行清理的壁纸图片 URL 列表。
+ * 这个列表包含了一些壁纸图片的 URL，这些图片不会被清理。
  * 提供壁纸图片 URL 的单例对象。
  */
 object WallpaperProvider {

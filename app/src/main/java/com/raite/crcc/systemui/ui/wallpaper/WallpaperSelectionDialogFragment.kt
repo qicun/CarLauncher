@@ -30,7 +30,8 @@ class WallpaperSelectionDialogFragment : DialogFragment(), WallpaperAdapter.Wall
 
     // ViewModel
     private val viewModel: WallpaperViewModel by viewModels {
-        WallpaperViewModelFactory(WallpaperRepository()) // 在实际应用中，这里应该通过依赖注入提供Repository
+        // 使用 applicationContext 来避免内存泄漏
+        WallpaperViewModelFactory(requireContext().applicationContext)
     }
 
     private lateinit var wallpaperAdapter: WallpaperAdapter

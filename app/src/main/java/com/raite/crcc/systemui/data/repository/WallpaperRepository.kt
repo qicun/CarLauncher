@@ -1,8 +1,8 @@
 package com.raite.crcc.systemui.data.repository
 
+import android.content.Context
 import com.raite.crcc.systemui.data.model.Section
 import com.raite.crcc.systemui.data.model.WallpaperItem
-import com.raite.crcc.systemui.utils.ContextUtil
 import com.raite.crcc.systemui.utils.Plog
 import com.raite.crcc.systemui.R
 import kotlinx.coroutines.delay
@@ -12,7 +12,7 @@ import kotlin.random.Random
  * 壁纸数据仓库
  * 负责提供壁纸数据，目前为模拟数据。
  */
-class WallpaperRepository {
+class WallpaperRepository(private val context: Context) {
 
     private val mObjectTag by lazy {
         "${javaClass.simpleName}@${System.identityHashCode(this)}"
@@ -51,7 +51,7 @@ class WallpaperRepository {
         // 1. 添加本地壁纸部分（总是成功）
         try {
             items.add(WallpaperItem.Header("本地壁纸", section = Section.LOCAL))
-            val localWallpaperUri = "android.resource://${ContextUtil.get().packageName}/${R.drawable.wallpaper}"
+            val localWallpaperUri = "android.resource://${context.packageName}/${R.drawable.wallpaper}"
             items.add(WallpaperItem.Thumbnail(localWallpaperUri, Section.LOCAL))
             Plog.i(mObjectTag, "Added local wallpaper section.")
         } catch (e: Exception) {
