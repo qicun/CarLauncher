@@ -45,6 +45,7 @@ import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import com.raite.crcc.systemui.util.ContextUtil
 
 /**
  * @Author lsh
@@ -137,7 +138,7 @@ class StatusBarView(
         mClick2EngineModeCount++
         if (mClick2EngineModeCount >= 10) {
             val intent = Intent(SettingsConfig.ACTION_ENGINE_MODE_ACTIVITY_OPEN)
-            Tools.openApp(context = App.mContext, intent, Display.DEFAULT_DISPLAY)
+            Tools.openApp(context = ContextUtil.context, intent, Display.DEFAULT_DISPLAY)
             return
         }
         mJump2EngineModeJob?.cancel()

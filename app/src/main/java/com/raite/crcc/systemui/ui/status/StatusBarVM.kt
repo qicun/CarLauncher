@@ -14,14 +14,17 @@ import android.content.IntentFilter
 import android.database.ContentObserver
 import android.os.Handler
 import android.os.Looper
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raite.crcc.cluster.data.drive.DriveManagerService
 import com.raite.crcc.cluster.data.line.LineManagerService
-import com.raite.crcc.systemui.App
+import com.raite.crcc.systemui.bean.NetWorkBean
+import com.raite.crcc.systemui.bean.StatusBean
 import com.raite.crcc.systemui.config.CctvConfig
 import com.raite.crcc.systemui.config.UpdateType
 import com.raite.crcc.systemui.config.UserConfig
+import com.raite.crcc.systemui.util.ContextUtil
 import com.raite.crcc.systemui.utils.Block
 import com.raite.crcc.systemui.utils.Dates
 import com.raite.crcc.systemui.utils.Plog
@@ -44,7 +47,8 @@ import org.greenrobot.eventbus.EventBus
  * @Description
  */
 open class StatusBarVM : ViewModel() {
-    private var mContext = App.mContext
+    private var TAG = StatusBarVM::class.java.simpleName
+    private var mContext = ContextUtil.context
     private var mLastTime: String = Dates().getTimeFormat()
     protected var mLiveData: SingleLiveData<StatusBarInfo> = SingleLiveData()
     protected var mTempLiveData: SingleLiveData<StatusBarInfo> = SingleLiveData()
@@ -60,6 +64,9 @@ open class StatusBarVM : ViewModel() {
     private val mDateFormatObserver: DateFormatObserver = DateFormatObserver()
     private var isCarLinked = false
     private var mIsLogin = false
+    var statusBean: MutableLiveData<StatusBean> = MutableLiveData()
+    var netWorkBean: MutableLiveData<NetWorkBean> = MutableLiveData()
+    var time: MutableLiveData<String> = MutableLiveData()
 
     companion object {
         private const val TAG = "StatusBarVM"

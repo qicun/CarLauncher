@@ -15,12 +15,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import com.raite.crcc.systemui.App
 import com.raite.crcc.systemui.R
 import com.raite.crcc.systemui.databinding.LayoutToastBinding
+import com.raite.crcc.systemui.util.ContextUtil
 import com.raite.crcc.systemui.utils.delayExecute
 
 /**
@@ -32,14 +31,14 @@ import com.raite.crcc.systemui.utils.delayExecute
 @UiThread
 @UiContext
 fun showToastShort(text: String) {
-    Toast().show(text)
+    Toast.show(text)
 }
 
-class Toast {
+object Toast {
 
-    private val mMillis = 1500L
-    private val mContext = App.mContext
-    private var mDialog: Dialog = Dialog(mContext, R.style.ToastStyle)
+    private const val mMillis = 1500L
+    private val mContext = ContextUtil.context
+    private val mDialog: Dialog = Dialog(mContext, R.style.ToastStyle)
     private val mBinding = LayoutToastBinding.inflate(LayoutInflater.from(mContext))
 
     init {
@@ -49,7 +48,7 @@ class Toast {
         mDialog.setCancelable(true)
 
         val params = mDialog.window?.attributes
-        params?.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        params?.width = WindowManager.LayoutParams.WRAP_CONTENT
         params?.height = getScreenHeight()
         params?.flags = (WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
@@ -67,12 +66,12 @@ class Toast {
     private fun getScreenHeight(): Int {
         val height = Resources.getSystem().displayMetrics.heightPixels
         val px2dp = px2dp(height.toFloat()) / 2 - 55 // 185
-        loge("get height : ${px2dp}--${height}")
+        loge("get height : $px2dp -- $height")
         return px2dp
     }
 
     private fun px2dp(pxValue: Float): Int {
-        val scale = mContext.resources.displayMetrics.density
+        val scale = Resources.getSystem().displayMetrics.density
         return (pxValue / scale + 0.5f).toInt()
     }
 

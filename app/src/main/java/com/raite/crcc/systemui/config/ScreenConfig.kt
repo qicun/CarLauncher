@@ -7,8 +7,8 @@
 
 package com.raite.crcc.systemui.config
 
-import com.raite.crcc.systemui.App
 import com.raite.crcc.systemui.R
+import com.raite.crcc.systemui.util.ContextUtil
 
 /**
  * @Author zl
@@ -17,16 +17,16 @@ import com.raite.crcc.systemui.R
  */
 object ScreenConfig {
 
-    val STATUS_BAR_HEIGHT = App.mContext.resources.getDimensionPixelSize(
+    val STATUS_BAR_HEIGHT = ContextUtil.context.resources.getDimensionPixelSize(
         com.android.internal.R.dimen.status_bar_height
     )
 
-    val NAVIGATION_BAR_HEIGHT = App.mContext.resources.getDimensionPixelSize(
+    val NAVIGATION_BAR_HEIGHT = ContextUtil.context.resources.getDimensionPixelSize(
         com.android.internal.R.dimen.navigation_bar_height
     )
 
     val PANEL_HEIGHT =
-        App.mContext.resources.getDimension(R.dimen.panel_height).toInt()
+        ContextUtil.context.resources.getDimension(R.dimen.panel_height).toInt()
 
     /** 3588默认副屏displayId */
     const val SECOND_DISPLAY_ID = 2

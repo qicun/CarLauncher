@@ -25,7 +25,7 @@ import android.os.PowerManager
 import android.os.storage.StorageManager
 import android.telephony.TelephonyManager
 import android.view.WindowManager
-import com.raite.crcc.systemui.App
+import com.raite.crcc.systemui.util.ContextUtil
 import com.raite.crcc.systemui.utils.DisplayWindowManager
 import com.raite.crcc.systemui.utils.UiWindowManager
 
@@ -37,7 +37,7 @@ import com.raite.crcc.systemui.utils.UiWindowManager
 object ServiceConfig {
 
     @UiContext
-    private val mUiContext = App.mContext
+    private val mUiContext = ContextUtil.context
 
     fun getBluetoothManager(@UiContext context: Context = mUiContext): BluetoothManager {
         return context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager

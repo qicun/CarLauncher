@@ -9,9 +9,9 @@ package com.raite.crcc.systemui.utils
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
-import com.raite.crcc.systemui.App
+import android.text.format.DateFormat
 import com.raite.crcc.systemui.R
-import com.raite.crcc.systemui.utils.getTimeFormatString
+import com.raite.crcc.systemui.util.ContextUtil
 import java.util.Calendar
 import java.util.Locale
 
@@ -24,8 +24,8 @@ class Dates {
 
     private val formatHm12 = SimpleDateFormat(PATTERN_TIME_HM_12, Locale.getDefault())
 
-    fun getTimeFormat(): String {
-        return if (is24HourFormat()) {
+    fun getTimeFormat(context: Context = ContextUtil.context): String {
+        return if (is24HourFormat(context)) {
             formatHm24.format(System.currentTimeMillis())
         } else {
             formatHm24.format(System.currentTimeMillis())
@@ -33,8 +33,8 @@ class Dates {
 //            .removeRange(0, 10)
     }
 
-    private fun is24HourFormat(context: Context = App.mContext): Boolean {
-        return context.getTimeFormatString() == "24"
+    private fun is24HourFormat(context: Context = ContextUtil.context): Boolean {
+        return DateFormat.is24HourFormat(context)
     }
 
     fun getNowDateWeek(context: Context): String {

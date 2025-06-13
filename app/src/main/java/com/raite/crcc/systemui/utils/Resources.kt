@@ -15,8 +15,9 @@ import android.annotation.StringRes
 import android.annotation.UiContext
 import android.content.Context
 import android.graphics.drawable.Drawable
+import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
-import com.raite.crcc.systemui.App
+import com.raite.crcc.systemui.util.ContextUtil
 
 /**
  * @Author zl
@@ -25,11 +26,11 @@ import com.raite.crcc.systemui.App
  */
 
 fun getString(@StringRes res: Int): String {
-    return App.mContext.resources.getString(res)
+    return ContextUtil.context.resources.getString(res)
 }
 
 fun getString(@StringRes res: Int, content: String): String {
-    return App.mContext.resources.getString(res, content)
+    return ContextUtil.context.resources.getString(res, content)
 }
 
 @UiContext
@@ -38,7 +39,7 @@ fun Context.getRaiteString(@StringRes res: Int): String {
 }
 
 fun getRaiteStringArray(@ArrayRes id: Int): Array<String> {
-    return App.mContext.resources.getStringArray(id)
+    return ContextUtil.context.resources.getStringArray(id)
 }
 
 @UiContext
@@ -54,4 +55,20 @@ fun Context.getRaiteColor(@ColorRes id: Int): Int {
 @DisplayContext
 fun Context.getRaiteDrawable(@DrawableRes id: Int): Drawable? {
     return ContextCompat.getDrawable(this, id)
+}
+
+fun getColor(@ColorRes id: Int): Int {
+    return ContextUtil.context.getColor(id)
+}
+
+fun getStringArray(@ArrayRes id: Int): Array<String> {
+    return ContextUtil.context.resources.getStringArray(id)
+}
+
+fun getDrawable(@DrawableRes id: Int): Drawable? {
+    return ContextCompat.getDrawable(ContextUtil.context, id)
+}
+
+fun getDimen(@DimenRes id: Int): Float {
+    return ContextUtil.context.resources.getDimension(id)
 }

@@ -21,6 +21,7 @@ import com.raite.crcc.systemui.common.IConfigChangedListener
 import com.raite.crcc.systemui.ui.ToastUI
 import com.raite.crcc.systemui.ui.subscreen.ScreenController
 import com.raite.crcc.systemui.utils.Plog
+import com.raite.crcc.systemui.util.ContextUtil
 
 /**
  * @Author lsh
@@ -41,7 +42,8 @@ class SystemUiMain private constructor(context: Context) :
         @SuppressLint("StaticFieldLeak")
         private var mInstance: SystemUiMain? = null
 
-        fun getInstance(context: Context = App.mContext): SystemUiMain {
+        @JvmStatic
+        fun getInstance(context: Context = ContextUtil.context): SystemUiMain {
             synchronized(SystemUiMain::class.java) {
                 if (mInstance == null) {
                     mInstance = SystemUiMain(context)

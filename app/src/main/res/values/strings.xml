@@ -173,4 +173,7 @@
     <string name="str_select_carriage_head_confirm_msg">是否选择%1$s为驾驶室？</string>
     <string name="str_select_carriage_head_confirm_set_msg">确定</string>
     <string name="str_select_carriage_head_confirm_cancel_msg">取消</string>
+
+    <string name="wallpaper_content_description">Background wallpaper</string>
+    <string name="change_wallpaper_description">Change wallpaper</string>
 </resources>

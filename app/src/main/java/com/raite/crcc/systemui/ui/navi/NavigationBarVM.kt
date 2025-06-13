@@ -46,6 +46,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import com.raite.crcc.systemui.util.ContextUtil
 
 /**
  * @Author lsh
@@ -62,7 +63,7 @@ class NavigationBarVM : ViewModel() {
     private val mUserLevelObserver: UserLevelObserver = UserLevelObserver()
     private var mHvacWindowShow = false
     private var mHvacSubWindowShow = false
-    private var mContext = App.mContext
+    private var mContext = ContextUtil.context
 
     private var mSelectDisplayType = DisplayType.DISPLAY_TYPE_NONE
     private var mSelectSubDisplayType = DisplayType.DISPLAY_TYPE_NONE
