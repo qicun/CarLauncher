@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 内部颜色透明 -->
+    <solid android:color="@android:color/transparent" />
+    <!-- 边框，3dp宽度，蓝色 -->
+    <stroke
+        android:width="3dp"
+        android:color="@android:color/holo_blue_dark" />
+    <!-- 圆角半径，与CardView保持一致，以确保边框完美贴合 -->
+    <corners android:radius="8dp" />
+</shape> 
