@@ -4,12 +4,17 @@ import com.raite.crcc.systemui.data.model.Section
 import com.raite.crcc.systemui.data.model.WallpaperItem
 import kotlinx.coroutines.delay
 import kotlin.random.Random
+import com.raite.crcc.systemui.utils.Plog
 
 /**
  * 壁纸数据仓库
  * 负责提供壁纸数据，目前为模拟数据。
  */
 class WallpaperRepository {
+
+    private val mObjectTag by lazy {
+        "${javaClass.simpleName}@${System.identityHashCode(this)}"
+    }
 
     private val recommendedWallpapers = listOf(
         "https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=500",
@@ -35,11 +40,14 @@ class WallpaperRepository {
      * @return Result 包装的壁纸列表
      */
     suspend fun getWallpapers(forceError: Boolean = false): Result<List<WallpaperItem>> {
+        Plog.i(mObjectTag, "getWallpapers called with forceError: $forceError")
         // 模拟网络延迟
         delay(1500)
 
         if (forceError || Random.nextFloat() < 0.2f) { // 20%的概率失败
-            return Result.failure(Exception("Failed to load wallpapers from network."))
+            val error = Exception("Failed to load wallpapers from network.")
+            Plog.e(mObjectTag, "getWallpapers failed: ${error.message}")
+            return Result.failure(error)
         }
 
         val items = mutableListOf<WallpaperItem>()
@@ -54,6 +62,7 @@ class WallpaperRepository {
         items.add(WallpaperItem.AddButton(Section.MY_WALLPAPERS))
         items.addAll(myWallpapers.map { WallpaperItem.Thumbnail(it, Section.MY_WALLPAPERS) })
 
+        Plog.i(mObjectTag, "getWallpapers succeeded with ${items.size} items.")
         return Result.success(items)
     }
 } 

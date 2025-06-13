@@ -8,6 +8,7 @@
 package com.raite.crcc.systemui.utils
 
 import android.util.Log
+import com.raite.crcc.systemui.BuildConfig
 
 /**
  * @Author zl
@@ -18,15 +19,21 @@ import android.util.Log
 internal object Plog {
     const val TAG = "systemui"
     fun i(tag: String, msg: String) {
-        Log.i(TAG, "$tag $msg")
+        if (BuildConfig.DEBUG) {
+            Log.i(TAG, "$tag $msg")
+        }
     }
 
     fun d(tag: String, msg: String) {
-        Log.d(TAG, "$tag $msg")
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "$tag $msg")
+        }
     }
 
     fun v(tag: String, msg: String) {
-        Log.v(TAG, "$tag $msg")
+        if (BuildConfig.DEBUG) {
+            Log.v(TAG, "$tag $msg")
+        }
     }
 
     fun w(tag: String, msg: String) {
@@ -47,7 +54,9 @@ internal object Plog {
 }
 
 fun Any.logi(msg: String) {
-    Plog.i(this::class.java.simpleName, msg)
+    if (BuildConfig.DEBUG) {
+        Plog.i(this::class.java.simpleName, msg)
+    }
 }
 
 fun Any.logw(msg: String) {

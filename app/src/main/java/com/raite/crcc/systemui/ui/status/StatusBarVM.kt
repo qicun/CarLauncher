@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raite.crcc.cluster.data.drive.DriveManagerService
 import com.raite.crcc.cluster.data.line.LineManagerService
-import com.raite.crcc.systemui.bean.NetWorkBean
-import com.raite.crcc.systemui.bean.StatusBean
+//import com.raite.crcc.systemui.bean.NetWorkBean
+//import com.raite.crcc.systemui.bean.StatusBean
 import com.raite.crcc.systemui.config.CctvConfig
 import com.raite.crcc.systemui.config.UpdateType
 import com.raite.crcc.systemui.config.UserConfig
@@ -64,8 +64,8 @@ open class StatusBarVM : ViewModel() {
     private val mDateFormatObserver: DateFormatObserver = DateFormatObserver()
     private var isCarLinked = false
     private var mIsLogin = false
-    var statusBean: MutableLiveData<StatusBean> = MutableLiveData()
-    var netWorkBean: MutableLiveData<NetWorkBean> = MutableLiveData()
+//    var statusBean: MutableLiveData<StatusBean> = MutableLiveData()
+//    var netWorkBean: MutableLiveData<NetWorkBean> = MutableLiveData()
     var time: MutableLiveData<String> = MutableLiveData()
 
     companion object {

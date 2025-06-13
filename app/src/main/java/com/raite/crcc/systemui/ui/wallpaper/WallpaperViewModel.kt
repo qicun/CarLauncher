@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.raite.crcc.systemui.data.model.Section
 import com.raite.crcc.systemui.data.model.WallpaperItem
 import com.raite.crcc.systemui.data.repository.WallpaperRepository
+import com.raite.crcc.systemui.utils.Plog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +18,10 @@ import kotlinx.coroutines.launch
  */
 class WallpaperViewModel(private val repository: WallpaperRepository) : ViewModel() {
 
+    private val mObjectTag by lazy {
+        "${javaClass.simpleName}@${System.identityHashCode(this)}"
+    }
+
     private val _uiState = MutableStateFlow<WallpaperUiState>(WallpaperUiState.Loading)
     val uiState: StateFlow<WallpaperUiState> = _uiState.asStateFlow()
 
@@ -26,6 +31,7 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
     private var selectedWallpaperUrl: String? = null
 
     init {
+        Plog.i(mObjectTag, "ViewModel instance created.")
         loadWallpapers()
     }
 
@@ -34,13 +40,16 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
      * @param forceError 强制触发一个错误用于测试
      */
     fun loadWallpapers(forceError: Boolean = false) {
+        Plog.i(mObjectTag, "loadWallpapers called with forceError: $forceError")
         _uiState.value = WallpaperUiState.Loading
         viewModelScope.launch {
             val result = repository.getWallpapers(forceError)
             result.onSuccess { items ->
+                Plog.i(mObjectTag, "Successfully loaded ${items.size} items from repository.")
                 originalList = items
                 updateDisplayedList()
             }.onFailure {
+                Plog.e(mObjectTag, "Failed to load wallpapers: ${it.message}")
                 _uiState.value = WallpaperUiState.Error(it.message ?: "未知错误")
             }
         }
@@ -50,6 +59,7 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
      * 处理壁纸点击事件
      */
     fun onWallpaperSelected(wallpaperUrl: String) {
+        Plog.i(mObjectTag, "Wallpaper selected: $wallpaperUrl")
         selectedWallpaperUrl = wallpaperUrl
         updateDisplayedList()
     }
@@ -58,6 +68,7 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
      * 切换板块的展开/折叠状态
      */
     fun toggleSection(section: Section) {
+        Plog.i(mObjectTag, "Toggling section: ${section.name}")
         val currentState = _uiState.value
         if (currentState is WallpaperUiState.Success) {
             val newList = currentState.wallpaperItems.map { item ->
@@ -76,6 +87,7 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
      * 根据当前状态（原始列表、选中项、折叠状态）更新UI状态
      */
     private fun updateDisplayedList() {
+        Plog.d(mObjectTag, "Updating displayed list...")
         val displayedList = mutableListOf<WallpaperItem>()
         var currentSectionExpanded = true
 
@@ -99,6 +111,7 @@ class WallpaperViewModel(private val repository: WallpaperRepository) : ViewMode
             }
         }
         _uiState.value = WallpaperUiState.Success(displayedList, selectedWallpaperUrl != null)
+        Plog.d(mObjectTag, "Displayed list updated. Item count: ${displayedList.size}, Finish enabled: ${selectedWallpaperUrl != null}")
     }
 }
 
