@@ -2,9 +2,11 @@ package com.raite.crcc.systemui.data.repository
 
 import com.raite.crcc.systemui.data.model.Section
 import com.raite.crcc.systemui.data.model.WallpaperItem
+import com.raite.crcc.systemui.utils.ContextUtil
+import com.raite.crcc.systemui.utils.Plog
+import com.raite.crcc.systemui.R
 import kotlinx.coroutines.delay
 import kotlin.random.Random
-import com.raite.crcc.systemui.utils.Plog
 
 /**
  * 壁纸数据仓库
@@ -26,7 +28,9 @@ class WallpaperRepository {
         "https://images.unsplash.com/photo-1542401886-65d6c61db217?w=500",
         "https://images.unsplash.com/photo-1552083375-1447ce886485?w=500",
         "https://images.unsplash.com/photo-1562043236-65ab60354359?w=500",
-        "https://images.unsplash.com/photo-1528184039930-bd0395222146?w=500"
+        "https://images.unsplash.com/photo-1528184039930-bd0395222146?w=500",
+        "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=500",
+        "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=500"
     )
 
     private val myWallpapers = mutableListOf(
@@ -35,34 +39,51 @@ class WallpaperRepository {
     )
 
     /**
-     * 获取完整的壁纸列表，并组装成UI模型
+     * 获取完整的壁纸列表，并组装成UI模型。
+     * 这个方法现在更加健壮，总是会返回本地壁纸，即使网络获取失败。
      * @param forceError 是否强制模拟一个错误
      * @return Result 包装的壁纸列表
      */
     suspend fun getWallpapers(forceError: Boolean = false): Result<List<WallpaperItem>> {
         Plog.i(mObjectTag, "getWallpapers called with forceError: $forceError")
-        // 模拟网络延迟
-        delay(1500)
-
-        if (forceError || Random.nextFloat() < 0.2f) { // 20%的概率失败
-            val error = Exception("Failed to load wallpapers from network.")
-            Plog.e(mObjectTag, "getWallpapers failed: ${error.message}")
-            return Result.failure(error)
-        }
-
         val items = mutableListOf<WallpaperItem>()
 
-        // 添加推荐壁纸部分
-        items.add(WallpaperItem.Header("壁纸推荐", section = Section.RECOMMENDED))
-        items.addAll(recommendedWallpapers.map { WallpaperItem.Thumbnail(it, Section.RECOMMENDED) })
+        // 1. 添加本地壁纸部分（总是成功）
+        try {
+            items.add(WallpaperItem.Header("本地壁纸", section = Section.LOCAL))
+            val localWallpaperUri = "android.resource://${ContextUtil.get().packageName}/${R.drawable.wallpaper}"
+            items.add(WallpaperItem.Thumbnail(localWallpaperUri, Section.LOCAL))
+            Plog.i(mObjectTag, "Added local wallpaper section.")
+        } catch (e: Exception) {
+            Plog.e(mObjectTag, "Failed to add local wallpaper section", e)
+        }
 
 
-        // 添加我的壁纸部分
-        items.add(WallpaperItem.Header("我的作品", section = Section.MY_WALLPAPERS))
-        items.add(WallpaperItem.AddButton(Section.MY_WALLPAPERS))
-        items.addAll(myWallpapers.map { WallpaperItem.Thumbnail(it, Section.MY_WALLPAPERS) })
+        // 2. 尝试添加网络壁纸部分（可能会失败）
+        try {
+            // 模拟网络延迟
+            delay(1500)
 
-        Plog.i(mObjectTag, "getWallpapers succeeded with ${items.size} items.")
+            if (forceError || Random.nextFloat() < 0.2f) { // 20%的概率失败
+                throw Exception("Failed to load wallpapers from network.")
+            }
+
+            // 添加推荐壁纸部分
+            items.add(WallpaperItem.Header("壁纸推荐", section = Section.RECOMMENDED))
+            items.addAll(recommendedWallpapers.map { WallpaperItem.Thumbnail(it, Section.RECOMMENDED) })
+
+            // 添加我的壁纸部分
+            items.add(WallpaperItem.Header("我的作品", section = Section.MY_WALLPAPERS))
+            items.add(WallpaperItem.AddButton(Section.MY_WALLPAPERS))
+            items.addAll(myWallpapers.map { WallpaperItem.Thumbnail(it, Section.MY_WALLPAPERS) })
+
+            Plog.i(mObjectTag, "Successfully added network wallpapers.")
+        } catch (e: Exception) {
+            // 网络部分失败，只记录错误，不影响整体结果
+            Plog.e(mObjectTag, "Failed to get network wallpapers, but proceeding with local items.", e)
+        }
+
+        Plog.i(mObjectTag, "getWallpapers finished, returning ${items.size} items in total.")
         return Result.success(items)
     }
 } 
