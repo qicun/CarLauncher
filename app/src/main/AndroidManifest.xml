@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:sharedUserId="android.uid.system">
+    android:sharedUserId="${sharedUserId}">
 
     <!-- Used to read storage for all users -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -258,11 +258,10 @@
             android:name=".ui.launcher.LauncherActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.CarLauncher.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

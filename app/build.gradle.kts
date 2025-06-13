@@ -32,10 +32,12 @@ android {
 
     buildTypes {
         debug {
-            signingConfig = signingConfigs["rail_platform"]
+            // debug 构建使用默认的调试签名，不指定 signingConfig
+            manifestPlaceholders["sharedUserId"] = ""
         }
         release {
             signingConfig = signingConfigs["rail_platform"]
+            manifestPlaceholders["sharedUserId"] = "android.uid.system"
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
