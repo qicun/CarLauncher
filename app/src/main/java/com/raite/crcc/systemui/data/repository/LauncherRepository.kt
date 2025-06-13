@@ -24,18 +24,21 @@ object LauncherRepository {
      * 从系统中加载所有可启动的应用程序。
      * 查询 PackageManager，获取包含 CATEGORY_LAUNCHER 的应用，
      * 并将它们映射为 AppInfo 对象列表。
+     * @param excludedPackages 一个包含不应加载的应用包名的Set。
      */
-    fun loadLaunchableApps() {
+    fun loadLaunchableApps(excludedPackages: Set<String> = emptySet()) {
         val pm = ContextUtil.context.packageManager
         val intent = Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_LAUNCHER)
         val resolveInfoList = pm.queryIntentActivities(intent, 0)
-        val appList = resolveInfoList.map {
-            AppInfo(
-                label = it.loadLabel(pm).toString(),
-                packageName = it.activityInfo.packageName,
-                icon = it.loadIcon(pm)
-            )
-        }.sortedBy { it.label } // 按应用名称排序
+        val appList = resolveInfoList
+            .filterNot { excludedPackages.contains(it.activityInfo.packageName) }
+            .map {
+                AppInfo(
+                    label = it.loadLabel(pm).toString(),
+                    packageName = it.activityInfo.packageName,
+                    icon = it.loadIcon(pm)
+                )
+            }.sortedBy { it.label } // 按应用名称排序
         _apps.value = appList
     }
 

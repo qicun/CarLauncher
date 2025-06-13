@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fixed_apps_whitelist">
+        <!-- 示例: 设置 -->
+        <item>com.android.settings</item>
+        <!-- 示例: 电话 -->
+        <item>com.android.dialer</item>
+        <!-- 示例: 蓝牙 -->
+        <item>com.android.bluetooth</item>
+    </string-array>
+</resources> 

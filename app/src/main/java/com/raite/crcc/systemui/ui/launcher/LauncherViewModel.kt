@@ -29,9 +29,9 @@ class LauncherViewModel : ViewModel() {
      * 调用 Repository 来加载可启动的应用列表。
      * 使用 viewModelScope 来确保协程的生命周期与 ViewModel 绑定，避免内存泄漏。
      */
-    private fun loadApps() {
+    fun loadApps(excludedPackages: Set<String> = emptySet()) {
         viewModelScope.launch {
-            LauncherRepository.loadLaunchableApps()
+            LauncherRepository.loadLaunchableApps(excludedPackages)
         }
     }
 } 
