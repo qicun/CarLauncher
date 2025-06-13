@@ -24,11 +24,8 @@ class WallpaperRepository(private val context: Context) {
         "https://images.unsplash.com/photo-1487088678257-3a541e6e3922?w=500",
         "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=500",
         "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=500",
-        "https://images.unsplash.com/photo-1507525428034-b723a9ce6890?w=500",
         "https://images.unsplash.com/photo-1542401886-65d6c61db217?w=500",
         "https://images.unsplash.com/photo-1552083375-1447ce886485?w=500",
-        "https://images.unsplash.com/photo-1562043236-65ab60354359?w=500",
-        "https://images.unsplash.com/photo-1528184039930-bd0395222146?w=500",
         "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=500",
         "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=500"
     )
@@ -37,6 +34,14 @@ class WallpaperRepository(private val context: Context) {
         "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=500",
         "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=500"
     )
+    // 定义多个本地壁纸资源的列表
+    private val localWallpapers = listOf(
+        R.drawable.wallpaper,
+        R.drawable.pexels5,
+        R.drawable.pexels_kaan,
+        R.drawable.pexels_pripicart,
+    )
+
 
     /**
      * 获取完整的壁纸列表，并组装成UI模型。
@@ -51,8 +56,13 @@ class WallpaperRepository(private val context: Context) {
         // 1. 添加本地壁纸部分（总是成功）
         try {
             items.add(WallpaperItem.Header("本地壁纸", section = Section.LOCAL))
-            val localWallpaperUri = "android.resource://${context.packageName}/${R.drawable.wallpaper}"
-            items.add(WallpaperItem.Thumbnail(localWallpaperUri, Section.LOCAL))
+
+            // 遍历每个本地壁纸资源并添加到 items
+            localWallpapers.forEach { resourceId ->
+                val uri = "android.resource://${context.packageName}/$resourceId"
+                items.add(WallpaperItem.Thumbnail(uri, Section.LOCAL))
+            }
+
             Plog.i(mObjectTag, "Added local wallpaper section.")
         } catch (e: Exception) {
             Plog.e(mObjectTag, "Failed to add local wallpaper section", e)
@@ -72,17 +82,28 @@ class WallpaperRepository(private val context: Context) {
             items.add(WallpaperItem.Header("壁纸推荐", section = Section.RECOMMENDED))
             items.addAll(recommendedWallpapers.map { WallpaperItem.Thumbnail(it, Section.RECOMMENDED) })
 
-            // 添加我的壁纸部分
-            items.add(WallpaperItem.Header("我的作品", section = Section.MY_WALLPAPERS))
-            items.add(WallpaperItem.AddButton(Section.MY_WALLPAPERS))
-            items.addAll(myWallpapers.map { WallpaperItem.Thumbnail(it, Section.MY_WALLPAPERS) })
-
             Plog.i(mObjectTag, "Successfully added network wallpapers.")
         } catch (e: Exception) {
             // 网络部分失败，只记录错误，不影响整体结果
             Plog.e(mObjectTag, "Failed to get network wallpapers, but proceeding with local items.", e)
         }
+        try {
+            // 添加我的壁纸部分
+            items.add(WallpaperItem.Header("我的作品", section = Section.MY_WALLPAPERS))
+            items.add(WallpaperItem.AddButton(Section.MY_WALLPAPERS))
+//            items.addAll(myWallpapers.map { WallpaperItem.Thumbnail(it, Section.MY_WALLPAPERS) })
+            // 遍历每个本地壁纸资源并添加到 items
+            localWallpapers.forEach { resourceId ->
+                val uri = "android.resource://${context.packageName}/$resourceId"
+                items.add(WallpaperItem.Thumbnail(uri, Section.MY_WALLPAPERS))
+            }
+            items.addAll(myWallpapers.map { WallpaperItem.Thumbnail(it.toString(), Section.MY_WALLPAPERS) })
 
+
+            Plog.i(mObjectTag, "Added local wallpaper section.")
+        } catch (e: Exception) {
+            Plog.e(mObjectTag, "Failed to add local wallpaper section", e)
+        }
         Plog.i(mObjectTag, "getWallpapers finished, returning ${items.size} items in total.")
         return Result.success(items)
     }
