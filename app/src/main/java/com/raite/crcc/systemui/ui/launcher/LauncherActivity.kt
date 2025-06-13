@@ -3,6 +3,7 @@ package com.raite.crcc.systemui.ui.launcher
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -40,13 +41,14 @@ class LauncherActivity : AppCompatActivity(), WallpaperSelectionDialogFragment.O
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         wallpaperView = findViewById(R.id.wallpaper)
         val viewPager: ViewPager2 = findViewById(R.id.viewPager)
+        val changeWallpaperButton: View = findViewById(R.id.changeWallpaperButton)
 
         // 设置 ViewPager2 的适配器
         viewPager.adapter = DesktopPagerAdapter(this)
 
-        // 为壁纸视图设置点击监听器以打开选择器
-        wallpaperView.setOnClickListener {
-            Plog.i(mObjectTag, "Wallpaper view clicked, showing selection dialog.")
+        // 为更换壁纸按钮设置点击监听器以打开选择器
+        changeWallpaperButton.setOnClickListener {
+            Plog.i(mObjectTag, "Change wallpaper button clicked, showing selection dialog.")
             WallpaperSelectionDialogFragment.newInstance()
                 .show(supportFragmentManager, WallpaperSelectionDialogFragment.TAG)
         }

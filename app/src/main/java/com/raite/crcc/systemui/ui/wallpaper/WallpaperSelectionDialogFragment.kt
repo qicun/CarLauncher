@@ -11,10 +11,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.raite.crcc.systemui.R
 import com.raite.crcc.systemui.data.model.Section
 import com.raite.crcc.systemui.data.model.WallpaperItem
 import com.raite.crcc.systemui.data.repository.WallpaperRepository
 import com.raite.crcc.systemui.databinding.DialogWallpaperSelectionBinding
+import com.raite.crcc.systemui.util.GridSpacingItemDecoration
 import com.raite.crcc.systemui.utils.Plog
 import kotlinx.coroutines.flow.collectLatest
 
@@ -52,13 +54,24 @@ class WallpaperSelectionDialogFragment : DialogFragment(), WallpaperAdapter.Wall
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // 设置弹窗尺寸
+        dialog?.window?.let {
+            Plog.i(mObjectTag, "Setting dialog window size to 1440x810")
+            it.setLayout(1440, 810)
+            it.setBackgroundDrawableResource(R.color.dialog_background_grey)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         Plog.i(mObjectTag, "onCreateView called.")
         _binding = DialogWallpaperSelectionBinding.inflate(inflater, container, false)
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent) // 使用透明背景以显示圆角
+        // 移动到 onStart 以确保 dialog 非空
+        // dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent) 
         return binding.root
     }
 
@@ -73,13 +86,22 @@ class WallpaperSelectionDialogFragment : DialogFragment(), WallpaperAdapter.Wall
     private fun setupRecyclerView() {
         Plog.d(mObjectTag, "Setting up RecyclerView.")
         wallpaperAdapter = WallpaperAdapter(this)
-        val gridLayoutManager = GridLayoutManager(context, 4) // 初始设置为4列
+        
+        // 基于项目和弹窗尺寸动态计算列数
+        val spacing = resources.getDimensionPixelSize(R.dimen.wallpaper_item_spacing)
+        val itemWidth = resources.getDimensionPixelSize(R.dimen.wallpaper_item_width)
+        // 总宽度 - 两侧的 padding
+        val availableWidth = 1440 - (spacing * 2) 
+        val spanCount = availableWidth / (itemWidth + spacing)
+        Plog.i(mObjectTag, "Calculated span count: $spanCount")
+
+        val gridLayoutManager = GridLayoutManager(context, spanCount)
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 // 让 Header 和 AddButton 占据整行
                 return when (wallpaperAdapter.getItemViewType(position)) {
-                    0, 2 -> gridLayoutManager.spanCount // VIEW_TYPE_HEADER, VIEW_TYPE_ADD_BUTTON
+                    0, 2 -> spanCount // VIEW_TYPE_HEADER, VIEW_TYPE_ADD_BUTTON
                     else -> 1 // VIEW_TYPE_THUMBNAIL
                 }
             }
@@ -88,6 +110,8 @@ class WallpaperSelectionDialogFragment : DialogFragment(), WallpaperAdapter.Wall
         binding.wallpaperRecyclerView.apply {
             layoutManager = gridLayoutManager
             adapter = wallpaperAdapter
+            // 添加自定义的间距装饰器
+            addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, false))
         }
     }
 

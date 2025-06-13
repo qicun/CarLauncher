@@ -420,4 +420,14 @@
     <dimen name="panel_seekbar_height">@dimen/dp_32</dimen>
     <dimen name="panel_seekbar_radius">@dimen/dp_3</dimen>
     <dimen name="app_icon_radius">@dimen/dp_4</dimen>
+
+    <dimen name="text_22_sp">22sp</dimen>
+    <dimen name="text_24_sp">24sp</dimen>
+    <dimen name="text_30_sp">30sp</dimen>
+
+    <!-- Wallpaper Dialog Dimensions -->
+    <dimen name="wallpaper_item_width">204dp</dimen>
+    <dimen name="wallpaper_item_height">114dp</dimen>
+    <dimen name="wallpaper_item_spacing">20dp</dimen>
+    <dimen name="wallpaper_selection_checkbox_size">26dp</dimen>
 </resources>
