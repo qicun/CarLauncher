@@ -36,7 +36,7 @@ class WallpaperRepository(private val context: Context) {
     )
     // 定义多个本地壁纸资源的列表
     private val localWallpapers = listOf(
-        R.drawable.wallpaper,
+        R.drawable.home_wallpaper,
         R.drawable.pexels5,
         R.drawable.pexels_kaan,
         R.drawable.pexels_pripicart,

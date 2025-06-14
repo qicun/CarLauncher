@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -187,13 +186,13 @@ class LauncherActivity : AppCompatActivity(), WallpaperSelectionDialogFragment.O
         val wallpaperUrl = sharedPreferences.getString(KEY_WALLPAPER_URL, null)
         Plog.i(mObjectTag, "Loading wallpaper. Saved URL: $wallpaperUrl")
 
-        val data: Any = wallpaperUrl ?: R.drawable.wallpaper
+        val data: Any = wallpaperUrl ?: R.drawable.home_wallpaper
 
         val request = ImageRequest.Builder(this)
             .data(data)
             .target(wallpaperView)
             .crossfade(true)
-            .error(R.drawable.wallpaper) // 如果从URL加载失败，则显示此drawable
+            .error(R.drawable.home_wallpaper) // 如果从URL加载失败，则显示此drawable
             .build()
 
         imageLoader.enqueue(request)

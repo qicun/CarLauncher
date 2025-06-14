@@ -14,6 +14,10 @@ import com.raite.crcc.systemui.data.model.AppInfo
 class AppListAdapter(private val onAppClickListener: (AppInfo) -> Unit) :
     ListAdapter<AppInfo, AppListAdapter.AppViewHolder>(AppDiffCallback()) {
 
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position).itemType
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_app, parent, false)
         return AppViewHolder(view)

@@ -26,8 +26,7 @@ class DesktopPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(ac
      * @return 一个新的 DesktopPageFragment 实例。
      */
     override fun createFragment(position: Int): Fragment {
-        // 所有的页面都使用同一个 Fragment 布局，
-        // 未来可以根据 position 创建不同类型的桌面。
-        return DesktopPageFragment.newInstance()
+        // 为每个页面创建一个新的 DesktopPageFragment 实例
+        return DesktopPageFragment.newInstance(position)
     }
 } 
